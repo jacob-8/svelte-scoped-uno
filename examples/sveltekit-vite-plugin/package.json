@@ -1,0 +1,31 @@
+{
+  "name": "sveltekit-vite-plugin",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "stackblitz:dev": "npm install && vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+  },
+  "devDependencies": {
+    "@iconify-json/logos": "^1.1.22",
+    "@iconify-json/ri": "^1.1.4",
+    "@sveltejs/adapter-auto": "^1.0.0",
+    "@sveltejs/kit": "^1.0.0",
+    "@types/marked": "^4.0.8",
+    "marked": "^4.2.12",
+    "svelte": "^3.55.0",
+    "svelte-check": "^3.0.1",
+    "svelte-scoped-uno": "^0.0.1",
+    "tslib": "^2.4.1",
+    "typescript": "^4.9.4",
+    "unocss": "^0.50.6",
+    "vite": "^4.0.0"
+  },
+  "stackblitz": {
+    "installDependencies": false,
+    "startCommand": "npm run stackblitz:dev"
+  }
+}
