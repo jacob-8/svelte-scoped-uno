@@ -7,7 +7,7 @@ import prettierSvelte from 'prettier-plugin-svelte'
 
 import { transformSvelteSFC } from './transform'
 
-describe('svelte-scoped', () => {
+describe('transform', () => {
   const safelistClassToSkip = 'mr-7'
   const uno = createGenerator({
     presets: [
@@ -106,7 +106,7 @@ describe('svelte-scoped', () => {
 
       <style>
         :global([dir=\\"rtl\\"] .uno-795nkx) {
-          right: 0rem;
+          right: 0;
         }
         :global(.uno-795nkx) {
           margin-bottom: 0.25rem;
@@ -128,7 +128,7 @@ describe('svelte-scoped', () => {
 
       <style>
         :global([dir=\\"rtl\\"] ._rtl\\\\:right-0_7dkb0w) {
-          right: 0rem;
+          right: 0;
         }
         :global(._mb-1_7dkb0w) {
           margin-bottom: 0.25rem;
@@ -181,7 +181,7 @@ describe('svelte-scoped', () => {
 
       <style>
         @media (min-width: 640px) {
-          :global(.dark .uno-1eyzu3 > :not([hidden]) ~ :not([hidden]):hover) {
+          :global(.dark .uno-1eyzu3:hover > :not([hidden]) ~ :not([hidden])) {
             --un-space-x-reverse: 0;
             margin-left: calc(0.25rem * calc(1 - var(--un-space-x-reverse)));
             margin-right: calc(0.25rem * var(--un-space-x-reverse));
@@ -353,6 +353,23 @@ describe('svelte-scoped', () => {
     `)
   })
 
+  test('does not add styles to a commented out style tag', async () => {
+    const code = `<div class="hidden" />
+      <!-- <style></style> -->`
+    const output = await transform(code)
+    expect(output).toMatchInlineSnapshot(`
+      "<div class=\\"uno-ssrvwc\\" />
+
+      <!-- <style></style> -->
+      <style>
+        :global(.uno-ssrvwc) {
+          display: none;
+        }
+      </style>
+      "
+    `);
+  })
+
   test('everything', async () => {
     const code = `
 <div class="bg-red-500 sm:text-xl dark:hover:bg-green-500 transform scale-5" />
@@ -368,21 +385,20 @@ describe('svelte-scoped', () => {
     expect(await transform(code, { combine: false })).toMatchSnapshot()
   })
 
-  test.skip('in component preflights and safelist (use in vanilla Svelte, not SvelteKit)', async () => {
-    const code = `
-<div class="shadow-lg" />
-<style uno:preflights uno:safelist></style>
-    `.trim()
-    expect(await transform(code)).toMatchSnapshot()
-  })
 
   // BUG: When this plugin is run on a component library first, and then in a project second, make sure to use different hashing prefixes because when `uno.parseToken()` checks a previously hashed class like `.uno-ssrvwc` it will add it to uno's cache of non-matches, then when `uno.generate()` runs it will not output the result of that shortcut. I don't know the proper solution to this and I don't think clearing uno's cache of non-matches is right. To see this bug run the following test:
   test.skip('BUG: when a hashed style already exists (from an imported component library that was already processed), and style is found again it will not be output', async () => {
     const result = await transform(`
     <div class="uno-ssrvwc hidden" />`.trim())
     expect(result).toMatchInlineSnapshot(`
-      "<div class=\\"uno-ssrvwc uno-ssrvwc\\" />
-      <style></style>"
+      "<div class=\\"uno-ssrvwc\\" />
+
+      <style>
+        :global(.uno-ssrvwc) {
+          display: none;
+        }
+      </style>
+      "
     `)
   })
 })

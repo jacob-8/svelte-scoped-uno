@@ -3,8 +3,9 @@ import { type UnoGenerator, expandVariantGroup } from '@unocss/core'
 import { wrapSelectorsWithGlobal } from './wrap-global'
 import { hash } from './hash'
 
-// TODO add a negative lookbhind to the regex to make sure it's not inside a comment: (?<!<!--\s*)
-const stylesTagWithCapturedDirectivesRE = /<style([^>]*)>[\s\S]*?<\/style\s*>/ // <style uno:preflights uno:safelist global>...</style>
+// Added a negative lookbhind to the regex to make sure it's not inside a comment: 
+const stylesTagWithCapturedDirectivesRE = /(?<!<!--\s*)<style([^>]*)>[\s\S]*?<\/style\s*>/
+
 const classesRE = /class=(["'\`])([\S\s]+?)\1/g // class="mb-1"
 const classesDirectivesRE = /class:([\S]+?)={/g // class:mb-1={foo}
 const classDirectivesShorthandRE = /class:([^=>\s/]+)[{>\s/]/g // class:mb-1 (compiled to class:uno-1hashz={mb-1})
@@ -24,7 +25,7 @@ export interface TransformSFCOptions {
   hashFn?: (str: string) => string
 }
 
-export async function transformSvelteSFC({ code, id, uno, isSvelteKit, options }: { code: string; id: string; uno: UnoGenerator; isSvelteKit?: boolean; options: TransformSFCOptions }): Promise<{ code: string; map?: SourceMap } | undefined> {
+export async function transformSvelteSFC({ code, id, uno, options }: { code: string; id: string; uno: UnoGenerator; options: TransformSFCOptions }): Promise<{ code: string; map?: SourceMap } | undefined> {
   const {
     classPrefix = 'uno-',
     combine = true,
@@ -34,29 +35,10 @@ export async function transformSvelteSFC({ code, id, uno, isSvelteKit, options }
   let styles = ''
   let map: SourceMap
 
-  const preexistingStylesTag = code.match(stylesTagWithCapturedDirectivesRE)
-  // const stylesTagDirectives = preexistingStylesTag?.[1].trim().split(' ')
-
   const classes = [...code.matchAll(classesRE)]
   const classDirectives = [...code.matchAll(classesDirectivesRE)]
   const classDirectivesShorthand = [...code.matchAll(classDirectivesShorthandRE)]
-
-  // TODO: check for --at-
-  const hasAt = false;
-
-  if (!classes.length && !classDirectives.length && !classDirectivesShorthand.length) {
-    if (hasAt) {
-      if (preexistingStylesTag) {
-        return {
-          code: code.replace(/(<style[^>]*>)/, `$1${styles}`),
-        }
-      }
-      return { code: `${code}\n<style>${styles}</style>` }
-    }
-    else {
-      return
-    }
-  }
+  if (!classes.length && !classDirectives.length && !classDirectivesShorthand.length) return
 
   const originalShortcuts = uno.config.shortcuts
   const shortcuts: Record<string, string[]> = {}
@@ -166,6 +148,7 @@ export async function transformSvelteSFC({ code, id, uno, isSvelteKit, options }
   }
   else { return }
 
+  const preexistingStylesTag = code.match(stylesTagWithCapturedDirectivesRE)
   if (preexistingStylesTag) {
     return {
       code: code.replace(/(<style[^>]*>)/, `$1${styles}`),
@@ -191,5 +174,4 @@ interface SourceMap {
 }
 
 // Possible Optimizations
-// 1. If <style> tag includes 'uno:preflights' and 'global' don't have uno.generate output root variables that it thinks are needed because preflights is set to false. If there is no easy way to do this in UnoCSS then we could also have preflights set to true and just strip them out if a style tag includes 'uno:preflights' and 'global' but that feels inefficient - is it?
-// 2. Don't let config-set shortcuts be included in hashed class, would make for clearer output but add complexity to the code
+// Don't let config-set shortcuts be included in hashed class, would make for clearer output but add complexity to the code
