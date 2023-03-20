@@ -7,12 +7,12 @@ const config = {
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
 	preprocess: [
+		vitePreprocess(),
 		ScopedUno({
 			options: {
-				classPrefix: 'spu-'
+				classPrefix: 'me-'
 			}
 		}),
-		vitePreprocess(),
 	],
 
 	kit: {

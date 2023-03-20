@@ -1,12 +1,9 @@
 # Svelte + Vite Plugin
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz_small.svg)](https://stackblitz.com/fork/github/unocss/unocss/tree/main/examples/vite-svelte-scoped)
+<!-- [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz_small.svg)](https://stackblitz.com/fork/github/unocss/unocss/tree/main/examples/vite-svelte-scoped) -->
 
-## Usage
-
-Set up using `mode: 'svelte-scoped'` as described in the [Svelte/SvelteKit scoped section](/packages/vite/README.md#sveltesveltekit-scoped-mode) of the [Vite instructions](/packages/vite/README.md).
-
-Please see the [SvelteKit svelte-scoped README](../sveltekit-scoped/README.md) for a more detailed `svelte-scoped` mode explanation.
+## Try Locally
+- In the root of the monorepo run `pnpm install` and `pnpm try:svelte` or just run `npm install` and `npm run dev` from this directory if you don't use pnpm.
 
 ----
 

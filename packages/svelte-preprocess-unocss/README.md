@@ -1,6 +1,9 @@
 # svelte-preprocess-unocss
 
-Run `svelte-scoped-uno` as a svelte preprocessor instead of as a Vite plugin to enable styles preprocessing in pipelines that don't use Vite, such as `svelte-package`.
+Run [svelte-scoped-uno](https://github.com/jacob-8/svelte-scoped-uno)
+ as a svelte preprocessor instead of as a Vite plugin to enable styles preprocessing in pipelines that don't use Vite, such as `svelte-package`. 
+ 
+ *Hopefully, someday `svelte-package` will heed applicable Vite plugins. Follow https://github.com/sveltejs/vite-plugin-svelte/issues/475 to see when this will be made possible. In the meantime this package was published to enable using `svelte-scoped-uno` in component libraries and other contexts that don't use Vite.*
 
 ## Installation
 
@@ -13,7 +16,7 @@ npm i -D svelte-preprocess-unocss
 ```js
 // svelte.config.js
 import adapter from '@sveltejs/adapter-auto'
-import preprocess from 'vite-preprocess'
+import { vitePreprocess } from '@sveltejs/kit/vite';
 
 import ScopedUno from 'svelte-preprocess-unocss'
 
@@ -41,22 +44,17 @@ const config = {
 export default config
 ```
 
-Place Uno config options in a `unocss.config.ts` file
+Place Uno config options in a `unocss.config.ts` file. 
 
 ```ts
 // unocss.config.ts
-import { defineConfig, presetIcons, presetUno } from 'unocss'
+import { defineConfig, presetUno } from 'svelte-preprocess-unocss'
 
 export default defineConfig({
   presets: [
     presetUno(),
-    presetIcons({
-      prefix: 'i-',
-      extraProperties: {
-        'display': 'inline-block',
-        'vertical-align': 'middle',
-      },
-    }),
   ],
 })
 ```
+
+All exports from `unocss` are reexported from `svelte-preprocess-unocss` so there's no need to install `unocss`. This will avoid any breaking changes from unocss affecting your project.

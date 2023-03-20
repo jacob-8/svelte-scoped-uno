@@ -26,9 +26,11 @@ export default function SveltePreprocessUnocss({
 }: {
   configOrPath?: UserConfig | string
   options?: SveltePreprocessUnocssOptions
-} = { options: {}}): PreprocessorGroup {
+} = { options: {} }): PreprocessorGroup {
   if (!options.transformDirectives)
     options.transformDirectives = true
+  if (!options.classPrefix)
+    options.classPrefix = 'spu-'
 
   let uno: UnoGenerator
   return {
