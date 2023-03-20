@@ -1,29 +1,21 @@
 import type { Plugin } from 'vite'
-import { type UnoGenerator, type UserConfig, createGenerator } from 'unocss'
-import { loadConfig } from '@unocss/config'
+import { type UnoGenerator } from 'unocss'
 import { transformDirectives } from "@unocss/transformer-directives";
 import MagicString from 'magic-string'
-
-export async function _transformDirectives({ code, uno }: { code: string; uno: UnoGenerator }): Promise<string> {
-  const s = new MagicString(code)
-  await transformDirectives(s, uno, {});
-  if (s.hasChanged()) return s.toString()
-  return code
-}
 
 const cssIdRE = /\.(css|postcss|sass|scss|less|stylus|styl)($|\?)/
 
 export function TransformDirectivesPlugin({
-  configOrPath,
+  getUno,
 }: {
-  configOrPath?: UserConfig | string
+  getUno: Promise<UnoGenerator>,
 }): Plugin {
   let uno: UnoGenerator
 
   return {
     name: 'svelte-scoped-uno:transform-directives',
-    async configResolved(_viteConfig) {
-      uno = await init(configOrPath)
+    async configResolved() {
+      uno = await getUno
     },
 
     transform(code, id) {
@@ -33,7 +25,9 @@ export function TransformDirectivesPlugin({
   }
 }
 
-async function init(configOrPath?: UserConfig | string) {
-  const { config } = await loadConfig(process.cwd(), configOrPath)
-  return createGenerator(config)
+export async function _transformDirectives({ code, uno }: { code: string; uno: UnoGenerator }): Promise<string> {
+  const s = new MagicString(code)
+  await transformDirectives(s, uno, {});
+  if (s.hasChanged()) return s.toString()
+  return code
 }

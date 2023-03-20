@@ -1,1 +1,4 @@
 - Remove preflights, safelist directives options
+- Add reset options
+- improve passing options
+- add restricted type for uno.config.ts

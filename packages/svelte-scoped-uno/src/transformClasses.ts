@@ -1,8 +1,9 @@
-import MagicString from 'magic-string'
-import { type UnoGenerator, expandVariantGroup, type SourceMap } from 'unocss'
+import MagicString, { type SourceMap } from 'magic-string'
+import { type UnoGenerator, expandVariantGroup } from 'unocss'
 import { wrapSelectorsWithGlobal } from './wrap-global'
 import { hash } from './hash'
 import { TransformClassesOptions } from './types'
+import { type TransformResult } from 'vite'
 
 // Added a negative lookbhind to the regex to make sure it's not inside a comment: 
 const stylesTagWithCapturedDirectivesRE = /(?<!<!--\s*)<style([^>]*)>[\s\S]*?<\/style\s*>/
@@ -12,7 +13,7 @@ const classesDirectivesRE = /class:([\S]+?)={/g // class:mb-1={foo}
 const classDirectivesShorthandRE = /class:([^=>\s/]+)[{>\s/]/g // class:mb-1 (compiled to class:uno-1hashz={mb-1})
 const classesFromInlineConditionalsRE = /'([\S\s]+?)'/g // { foo ? 'mt-1' : 'mt-2'}
 
-export async function transformClasses({ code, id, uno, options }: { code: string; id: string; uno: UnoGenerator; options: TransformClassesOptions }): Promise<{ code: string; map?: SourceMap } | undefined> {
+export async function transformClasses({ code, id, uno, options }: { code: string; id: string; uno: UnoGenerator; options: TransformClassesOptions }): Promise<TransformResult | undefined> {
   const classes = [...code.matchAll(classesRE)]
   const classDirectives = [...code.matchAll(classesDirectivesRE)]
   const classDirectivesShorthand = [...code.matchAll(classDirectivesShorthandRE)]
