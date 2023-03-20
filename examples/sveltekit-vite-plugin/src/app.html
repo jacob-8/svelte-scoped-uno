@@ -6,13 +6,12 @@
 		<meta name="viewport" content="width=device-width" />
 		<title>SvelteKit Scoped Uno</title>
 
-		<!-- Resets must be added before sveltekit head injected styles -->
-		<link rel="stylesheet" href="%sveltekit.assets%/tailwind-reset.css">
+    <!-- If you have your preferred styles reset and don't want to use the option one provided by svelte-scoped-uno, add that first  -->
 		
-		<!-- Then preflights and safelists (inlined in dev, added as a cacheable hased css file in build) -->
+    <!-- Then the global styles from svelte-scoped-uno (optional reset, preflights and safelists). These are inlined in dev, added as a cacheable hashed css file in build. -->
 		%svelte-scoped-uno.global%
 
-		<!-- Place other styles here that you want component based utility styles to be able to override -->
+		<!-- Place other styles here that you want component based utility styles to be able to override as Svelte component styles will be placed at sveltekit's head tag below -->
 
 		%sveltekit.head%
 	</head>

@@ -1,6 +1,7 @@
 import type { UnoGenerator } from 'unocss'
 import type { ViteDevServer } from 'vite'
 import { DEV_GLOBAL_STYLES_DATA_TITLE, GLOBAL_STYLES_PLACEHOLDER, PLACEHOLDER_USER_SETS_IN_INDEX_HTML } from './constants'
+import tailwindReset from './resets/tailwind-reset.min'
 
 /**
  * It would be nice to parse the svelte config to learn if user set a custom hooks.server name but both of the following methods have problems:
@@ -21,15 +22,10 @@ export function replaceGlobalStylesPlaceholder(code: string, stylesTag: string) 
   // preset-web-fonts doesn't heed the minify option and sends through newlines (\n) that break if we use regular quotes here, always using a backtick here is easier than removing newlines, which are actually kind of useful in dev mode. I might consider turning minify off altogether in dev mode.
 }
 
-export async function replacePlaceholderWithPreflightsAndSafelist(uno: UnoGenerator, code: string) {
-  const css = await generateGlobalCss(uno)
-  return {
-    code: replaceGlobalStylesPlaceholder(code, `<style type="text/css" data-title="${DEV_GLOBAL_STYLES_DATA_TITLE}">${css}</style>`),
-  }
-}
-
-export async function generateGlobalCss(uno: UnoGenerator): Promise<string> {
+export async function generateGlobalCss(uno: UnoGenerator, addReset?: 'tailwind'): Promise<string> {
   const { css } = await uno.generate('', { preflights: true, safelist: true, minify: true })
+  if (addReset === 'tailwind')
+    return tailwindReset + css
   return css
 }
 

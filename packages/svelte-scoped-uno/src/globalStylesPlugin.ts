@@ -1,9 +1,9 @@
 import type { Plugin, ResolvedConfig } from 'vite'
-import { generateGlobalCss, isServerHooksFile, checkTransformPageChunkHook, replaceGlobalStylesPlaceholder, replacePlaceholderWithPreflightsAndSafelist } from './global'
-import { PLACEHOLDER_USER_SETS_IN_INDEX_HTML } from './constants'
+import { generateGlobalCss, isServerHooksFile, checkTransformPageChunkHook, replaceGlobalStylesPlaceholder } from './global'
+import { DEV_GLOBAL_STYLES_DATA_TITLE, PLACEHOLDER_USER_SETS_IN_INDEX_HTML } from './constants'
 import { SSUContext } from '.'
 
-export function GlobalStylesPlugin({ ready, uno }: SSUContext): Plugin {
+export function GlobalStylesPlugin({ ready, uno }: SSUContext, addReset?: 'tailwind'): Plugin {
   let isSvelteKit: boolean
   let viteConfig: ResolvedConfig
   let unoCssFileReferenceId: string
@@ -22,18 +22,22 @@ export function GlobalStylesPlugin({ ready, uno }: SSUContext): Plugin {
     configureServer: checkTransformPageChunkHook,
 
     // serve
-    transform(code, id) {
-      if (isSvelteKit && viteConfig.command === 'serve' && isServerHooksFile(id))
-        return replacePlaceholderWithPreflightsAndSafelist(uno, code)
+    async transform(code, id) {
+      if (isSvelteKit && viteConfig.command === 'serve' && isServerHooksFile(id)) {
+        const css = await generateGlobalCss(uno, addReset)
+        return {
+          code: replaceGlobalStylesPlaceholder(code, `<style type="text/css" data-title="${DEV_GLOBAL_STYLES_DATA_TITLE}">${css}</style>`),
+        }
+      }
     },
 
     // build
     async buildStart() {
       if (viteConfig.command === 'build') {
-        const css = await generateGlobalCss(uno)
+        const css = await generateGlobalCss(uno, addReset)
         unoCssFileReferenceId = this.emitFile({
           type: 'asset',
-          name: 'uno.css',
+          name: 'svelte-scoped-uno-global.css',
           source: css,
         })
       }
@@ -61,8 +65,8 @@ export function GlobalStylesPlugin({ ready, uno }: SSUContext): Plugin {
           return html.replace(PLACEHOLDER_USER_SETS_IN_INDEX_HTML, unoCssHashedLinkTag)
 
         if (viteConfig.command === 'serve') {
-          const css = await generateGlobalCss(uno)
-          return html.replace(PLACEHOLDER_USER_SETS_IN_INDEX_HTML, `<style>${css}</style>`)
+          const css = await generateGlobalCss(uno, addReset)
+          return html.replace(PLACEHOLDER_USER_SETS_IN_INDEX_HTML, `<style type="text/css" data-title="${DEV_GLOBAL_STYLES_DATA_TITLE}">${css}</style>`)
         }
       }
     },

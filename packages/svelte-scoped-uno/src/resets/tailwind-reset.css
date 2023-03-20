@@ -355,3 +355,10 @@ video {
   max-width: 100%;
   height: auto;
 }
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+[hidden] {
+  display: none;
+}
+
+/* End Tailwind Reset */

@@ -14,7 +14,7 @@ export default function SvelteScopedUnoPlugin(options: SvelteScopedUnocssOptions
   const context = initUno(options.configOrPath);
 
   const plugins: Plugin[] = [
-    GlobalStylesPlugin(context),
+    GlobalStylesPlugin(context, options.addReset),
     TransformClassesPlugin(context, options),
     TransformDirectivesPlugin(context),
   ]

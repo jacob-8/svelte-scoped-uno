@@ -4,7 +4,9 @@ import SvelteScopedUno from 'svelte-scoped-uno'
 
 export default defineConfig({
   plugins: [
-    SvelteScopedUno(),
+    SvelteScopedUno({
+      addReset: 'tailwind',
+    }),
     sveltekit(),
   ],
 })

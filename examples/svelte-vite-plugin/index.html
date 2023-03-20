@@ -5,13 +5,12 @@
     <link rel="icon" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Add styles resets first  -->
-		<link rel="stylesheet" href="/tailwind-reset.css">
-
-    <!-- Then preflights and safelists (inlined in dev, added as a cacheable hased css file in build) -->
+    <!-- If you have your preferred styles reset, add that first  -->
+    
+    <!-- Then the global styles from svelte-scoped-uno (optional reset, preflights and safelists). These are inlined in dev, added as a cacheable hashed css file in build. -->
 		%svelte-scoped-uno.global%
 
-		<!-- Place other styles here that you want component based utility styles to be able to override -->
+		<!-- Place other styles here that you want component based utility styles to be able to override as Vite will automatically place Svelte component styles at the end of this <head> block -->
 
     <title>UnoCSS Svelte Scoped</title>
   </head>

@@ -8,7 +8,7 @@ A spin-off from [UnoCSS](https://github.com/unocss/unocss) that allows for full-
 
 Read the [svelte-scoped-uno setup instructions](./packages/svelte-scoped-uno/README.md) to scope utility classes by component.
 
-Alternatively, use [svelte-preprocess-unocess](./packages/svelte-preprocess-unocss/README.md) in contexts where Vite plugins don't work, like `svelte-package`.
+Alternatively, use [svelte-preprocess-unocess](./packages/svelte-preprocess-unocss/README.md) in contexts where Vite plugins don't work, like `svelte-package`. Anything discussed below regarding a global stylesheet will have no bearing on this package.
 
 ## Example Projects
 
@@ -21,29 +21,6 @@ Alternatively, use [svelte-preprocess-unocess](./packages/svelte-preprocess-unoc
 Place utility styles right inside of each component's style block instead of in a global `uno.css` file. Class names will be compiled to unique names so they will conflict nowhere and work everywhere. So classes that depend are interdependent with other components will just work. You can use `rtl:mr-1` or `dark:text-white` which rely on `dir="rtl"` or `.dark` being defined in a parent component. You can pass classes to children components as long as you pass them using a prop named `class`, e.g. `class="text-lg bg-red-100"`. Spacing out children `<Button>` components using `.space-x-2` will also work.
 
 Read more about [Why?](./Why.md)
-
-## Resets
-
-Discussed [here in UnoCSS](https://github.com/unocss/unocss#style-resetting), but note that SvelteKit provides no convenient `main.ts` sort of location where styles can be guaranteed to come first so for now you must manually place these into the head of `app.html` as seen in [`sveltekit-vite-plugin's app.html`](./examples/sveltekit-vite-plugin/src/app.html) file.
-
-## Preflights, Safelist
-
-**Preflights** and **safelist** classes will be added to the global styles import in your `<head>` tag as outlined in the [svelte-scoped-uno setup instructions](./packages/svelte-scoped-uno/README.md). 
-
-- If you use a particularly heavy class in many locations, consider adding it to your safelist so it will only be declared once, in the global styles.
-
-## Presets support
-
-Do to the unique nature of having a few necessary styles in a global stylesheet and everything else contained in each component where needed (kind of like Svelte itself), **presets** need to be handled on a case-by-case basis:
-
-- All of the presets that add basic utilities will work (uno, mini, wind, etc...)
-- [`@unocss/preset-typography`](https://github.com/unocss/unocss/tree/main/packages/preset-typography) adds a large amount of complex styles to the `.prose` class which `svelte-scoped` will not properly surround with `:global()` wrappers so add the `prose` class to your safelist is using this preset. All other classes from this preset like `prose-pink` will work fine like any other utility class as it just adds color variables. 
-- [`@unocss/preset-icons`](https://github.com/unocss/unocss/tree/main/packages/preset-icons) works
-- [`@unocss/web-fonts`](https://github.com/unocss/unocss/tree/main/packages/preset-icons) works
-- [@unocss/preset-rem-to-px](https://github.com/unocss/unocss/tree/main/packages/preset-rem-to-px) works (it only modifies styles generation so it and all like it will work)
-- [@unocss/preset-attributify](https://github.com/unocss/unocss/tree/main/packages/preset-attributify) and [@unocss/preset-tagify](https://github.com/unocss/unocss/tree/main/packages/preset-tagify) don't work as `svelte-scoped` uses its own extraction and compilation pipeline
-- For other presets, if they don't rely on traditional `class="..."` usage they will probably not work. If they add  complicated styles like see in typography's `.prose` then you probably need to place certain class names into your safelist.
-
 
 ## Output
 
@@ -259,6 +236,39 @@ will be transformed into this:
 
 When this reaches the Svelte compiler, it will remove the :global() wrappers, and add it's own scoping hash just to the `div` and `.foo` rules.
 
+## Resets
+
+By default UnoCSS leaves style resetting up to each user but they do provide some convenient [reset options](https://github.com/unocss/unocss#style-resetting). Since that SvelteKit provides no convenient `main.ts` sort of location where styles can be guaranteed to come first you either must manually place these into the head of `app.html` as seen in [`sveltekit-preprocess's app.html`](./examples/sveltekit-preprocess/src/app.html) file or you easily add them at the beginning of svelte-scoped-uno's global styles using the `addReset` option.
+
+```diff
+// vite.config.ts
+// ...
+  plugins: [
+    SvelteScopedUno({
++     addReset: 'tailwind',
+    }),
+    sveltekit(),
+  ],
+```
+
+## Preflights, Safelist
+
+**Preflights** and **safelist** classes will be added to the global styles import in your `<head>` tag as outlined in the [svelte-scoped-uno setup instructions](./packages/svelte-scoped-uno/README.md). 
+
+- If you use a particularly heavy class in many locations, consider adding it to your safelist so it will only be declared once, in the global styles.
+
+## Presets support
+
+Do to the unique nature of having a few necessary styles in a global stylesheet and everything else contained in each component where needed (kind of like Svelte itself), **presets** need to be handled on a case-by-case basis:
+
+- All of the presets that add basic utilities will work (uno, mini, wind, etc...)
+- [`@unocss/preset-typography`](https://github.com/unocss/unocss/tree/main/packages/preset-typography) adds a large amount of complex styles to the `.prose` class which `svelte-scoped` will not properly surround with `:global()` wrappers so add the `prose` class to your safelist is using this preset. All other classes from this preset like `prose-pink` will work fine like any other utility class as it just adds color variables. 
+- [`@unocss/preset-icons`](https://github.com/unocss/unocss/tree/main/packages/preset-icons) works
+- [`@unocss/web-fonts`](https://github.com/unocss/unocss/tree/main/packages/preset-icons) works
+- [@unocss/preset-rem-to-px](https://github.com/unocss/unocss/tree/main/packages/preset-rem-to-px) works (it only modifies styles generation so it and all like it will work)
+- [@unocss/preset-attributify](https://github.com/unocss/unocss/tree/main/packages/preset-attributify) and [@unocss/preset-tagify](https://github.com/unocss/unocss/tree/main/packages/preset-tagify) don't work as `svelte-scoped` uses its own extraction and compilation pipeline
+- For other presets, if they don't rely on traditional `class="..."` usage they will probably not work. If they add  complicated styles like see in typography's `.prose` then you probably need to place certain class names into your safelist.
+
 ## Notes
 
 - In development, individual classes will be retained and hashed in place for ease of toggling on and off in your browser's developer tools. `class="mb-1 mr-1"` will turn into something like `class="_mb-1_9hwi32 _mr-1_84jfy4`. In production, these will be compiled into a single class name using your desired prefix, `uno-` by default, and a hash based on the filename + class names, e.g. `class="uno-84dke3`.
@@ -271,5 +281,5 @@ When this reaches the Svelte compiler, it will remove the :global() wrappers, an
 
 ## Credit
 
-- A big thank you to [Anthony Fu](https://github.com/antfu) and all who have contributed to the [UnoCSS](https://github.com/unocss) project upon which this plugin sits. This plugin was originally the `svelte-scoped` mode of the UnoCSS Vite plugin, but was extracted into a separate plugin as it was not able to benefit from much of the UnoCSS ecosystem without specialized code due to using SFC scoping. It was becoming too difficult too maintain in that location and was diverging more and more from the standard UnoCSS use case.
-- Special thanks to [@fehnomenal](https://github.com/fehnomenal) on his help with placing the necessary global styles (preflights, safelists, .prose, etc) into the `<head>` tag before Svelte component styles are added.
+- A big thank you to [Anthony Fu](https://github.com/antfu) and all who have contributed to the [UnoCSS](https://github.com/unocss) project upon which this plugin sits. This plugin was originally the `svelte-scoped` mode of the UnoCSS Vite plugin, but was extracted into a separate plugin as it was not able to benefit from much of the UnoCSS ecosystem without specialized code due to using component scoping. It was becoming too difficult too maintain in that location and was diverging more and more from the standard UnoCSS use case.
+- Special thanks to [@fehnomenal](https://github.com/fehnomenal) on his help with placing the necessary global styles (preflights, safelists, `.prose`, etc) into the `<head>` tag before Svelte component styles are added.

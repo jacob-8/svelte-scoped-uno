@@ -1,10 +1,14 @@
-- add reset options
-- publish to npm
+# Roadmap
+
+- update tags, keywords
+- publish to npm 
 - add changelog
 - use in kitbook
 
 - improve package example and add stackblitz link
 - close UnoCSS PRs and update notices there about this package
+- update temp-s-p-u with link to updated preprocessor
+- think about preflights and safelist in packaged libraries that are consumed by apps not using svelte-scoped-uno
 
 - add issue to UnoCSS to deal with empty class having just a semicolon when using transformer:
 ```css
