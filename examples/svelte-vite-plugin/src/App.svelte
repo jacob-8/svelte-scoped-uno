@@ -18,8 +18,9 @@
       <h1
         class="animate-bounce color-#ff3e00 dark:color-white uppercase text-5xl fw-100 my-2rem mx-auto"
       >
-        UnoCSS + Svelte Scoped!
+        Svelte Scoped Uno!
       </h1>
+      
 
       <Logos />
 

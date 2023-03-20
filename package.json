@@ -1,0 +1,14 @@
+{
+  "name": "svelte-scoped-uno-root",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm stub",
+    "try:sveltekit": "pnpm --filter svelte-scoped-uno-sveltekit-vite-plugin-example dev",
+    "try:svelte": "pnpm --filter svelte-scoped-uno-svelte-vite-plugin-example dev",
+    "build": "pnpm --recursive --filter=./packages/* run build",
+    "stub": "pnpm --recursive --filter=./packages/* --parallel run stub",
+    "test": "pnpm --filter svelte-scoped-uno test",
+		"test:all": "pnpm --recursive --stream test -- --run"
+  }
+}

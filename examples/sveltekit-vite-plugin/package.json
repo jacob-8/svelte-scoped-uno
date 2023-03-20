@@ -1,5 +1,5 @@
 {
-  "name": "sveltekit-vite-plugin",
+  "name": "svelte-scoped-uno-sveltekit-vite-plugin-example",
   "type": "module",
   "scripts": {
     "dev": "vite dev",

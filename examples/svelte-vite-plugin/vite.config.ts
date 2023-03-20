@@ -1,12 +1,10 @@
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
-import UnoCSS from 'unocss/vite'
+import SvelteScopedUno from 'svelte-scoped-uno'
 
 export default defineConfig({
   plugins: [
-    UnoCSS({
-      mode: 'svelte-scoped',
-    }),
+    SvelteScopedUno(),
     svelte(),
   ],
 })
