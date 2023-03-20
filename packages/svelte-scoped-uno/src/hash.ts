@@ -1,4 +1,4 @@
-// duplicated from @unocss/transformer-compile-class
+// from @unocss/transformer-compile-class
 export function hash(str: string) {
   let i
   let l

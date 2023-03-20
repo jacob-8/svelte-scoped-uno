@@ -4,6 +4,7 @@ import { transformDirectives } from "@unocss/transformer-directives";
 import MagicString from 'magic-string'
 import { SSUContext } from '.';
 
+// From @unocss/transformer-directives - probably only need .css
 const cssIdRE = /\.(css|postcss|sass|scss|less|stylus|styl)($|\?)/
 
 export function TransformDirectivesPlugin({ ready, uno }: SSUContext): Plugin {

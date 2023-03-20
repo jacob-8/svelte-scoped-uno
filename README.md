@@ -288,11 +288,15 @@ To try this out in the example project here, install and then run dev.
 
 - In development, individual classes will be retained and hashed in place for ease of toggling on and off in your browser's developer tools. `class="mb-1 mr-1"` will turn into something like `class="_mb-1_9hwi32 _mr-1_84jfy4`. In production, these will be compiled into a single class name using your desired prefix, `uno-` by default, and a hash based on the filename + class names, e.g. `class="uno-84dke3`.
 - Vite plugins can't yet be used to preprocess files emitted by `svelte-package` as it does not use Vite. Follow https://github.com/sveltejs/vite-plugin-svelte/issues/475 to see when this will be made possible. In the meantime[svelte-preprocess-unocess](./packages/svelte-preprocess-unocss/README.md) was published to enable using `svelte-scoped-uno` in component libraries and other context that don't use Vite.
-- [UnoCSS Inspector doesn't work yet](https://github.com/unocss/unocss/issues/1718). PR's welcome! You would need to study how the `unocss:global` global does it by adding tokens to the tasks array via `tasks.push(extract(code, filename))`
-- If you update the config during dev, you'll need to restart your server to see the updated changes, this could be solved by using Uno's ConfigHMRPlugin
 
 ## Known Issues
 
 - Should ignore `class="mr-1"` type of strings defined inside comments
 - Classes referenced in explanatory markdown documentation that is parsed by MDSvex will be transformed contrary to expectation (and styles will be needlessly added). This package should ignore code blocks (whether inline surrounded by single backticks and multiple lines surrounded by three backticks)
 - Placing `dark:` prefixed styles in a component with `<style global></style>` will not work. Not sure if this is relevant anymore with the move away from using `<style global>` in that `vite-preprocess` doesn't support this feature.
+
+## Credit
+
+- A big thank you to Anthony Fu @antfu and all who have contributed to the UnoCSS project upon which this plugin sits. 
+  - This plugin was originally the `svelte-scoped` mode of the UnoCSS Vite plugin, but was extracted into a separate plugin as it was not able to benefit from much of the UnoCSS ecosystem without specialized code due to using SFC scoping. It was becoming too difficult too maintain in that location and was diverging more and more from the standard UnoCSS use case.
+- Special thanks to @fehnomenal on his help with placing the necessary global styles (preflights, safelists, .prose, etc) into the `<head>` tag before Svelte component styles are added.

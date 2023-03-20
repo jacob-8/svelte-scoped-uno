@@ -1,5 +1,10 @@
-- Remove preflights, safelist directives options
 - Add reset options
+- Remove preflights, safelist directives options
+- finish examples
 - improve passing options
+- publish to npm
+- use
 - add restricted type for uno.config.ts
-- give proper credit
+- close UnoCSS PRs and update notices there about this package
+- [UnoCSS Inspector doesn't work yet](https://github.com/unocss/unocss/issues/1718). PR's welcome! You would need to study how the `unocss:global` global does it by adding tokens to the tasks array via `tasks.push(extract(code, filename))`
+- If you update the config during dev, you'll need to restart your server to see the updated changes, this could be solved by using Uno's ConfigHMRPlugin
