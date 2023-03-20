@@ -2,20 +2,15 @@ import type { Plugin } from 'vite'
 import { type UnoGenerator } from 'unocss'
 import { transformDirectives } from "@unocss/transformer-directives";
 import MagicString from 'magic-string'
+import { SSUContext } from '.';
 
 const cssIdRE = /\.(css|postcss|sass|scss|less|stylus|styl)($|\?)/
 
-export function TransformDirectivesPlugin({
-  getUno,
-}: {
-  getUno: Promise<UnoGenerator>,
-}): Plugin {
-  let uno: UnoGenerator
-
+export function TransformDirectivesPlugin({ ready, uno }: SSUContext): Plugin {
   return {
     name: 'svelte-scoped-uno:transform-directives',
     async configResolved() {
-      uno = await getUno
+      await ready
     },
 
     transform(code, id) {

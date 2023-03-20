@@ -1,14 +1,9 @@
 import type { Plugin, ResolvedConfig } from 'vite'
-import { type UnoGenerator } from 'unocss'
 import { generateGlobalCss, isServerHooksFile, checkTransformPageChunkHook, replaceGlobalStylesPlaceholder, replacePlaceholderWithPreflightsAndSafelist } from './global'
 import { PLACEHOLDER_USER_SETS_IN_INDEX_HTML } from './constants'
+import { SSUContext } from '.'
 
-export function GlobalStylesPlugin({
-  getUno,
-}: {
-  getUno: Promise<UnoGenerator>,
-}): Plugin {
-  let uno: UnoGenerator
+export function GlobalStylesPlugin({ ready, uno }: SSUContext): Plugin {
   let isSvelteKit: boolean
   let viteConfig: ResolvedConfig
   let unoCssFileReferenceId: string
@@ -19,7 +14,7 @@ export function GlobalStylesPlugin({
 
     async configResolved(_viteConfig) {
       viteConfig = _viteConfig
-      uno = await getUno
+      await ready
       isSvelteKit = viteConfig.plugins.some(p => p.name.includes('sveltekit'))
     },
 

@@ -1,5 +1,5 @@
 import type { Plugin } from 'vite'
-import { type UserConfig, createGenerator } from 'unocss'
+import { type UserConfig, createGenerator, UnoGenerator } from 'unocss'
 import { loadConfig } from '@unocss/config'
 import { SvelteScopedUnocssOptions } from './types'
 import { TransformClassesPlugin } from './transformClassesPlugin'
@@ -15,17 +15,34 @@ export default function SvelteScopedUnoPlugin({
   configOrPath?: UserConfig | string
   options?: SvelteScopedUnocssOptions
 } = { options: {} }): Plugin[] {
-  const getUno = initUno(configOrPath);
+  const context = initUno(configOrPath);
 
   const plugins: Plugin[] = [
-    GlobalStylesPlugin({ getUno }),
-    TransformClassesPlugin({ getUno, options }),
-    TransformDirectivesPlugin({ getUno }),
+    GlobalStylesPlugin(context),
+    TransformClassesPlugin(context, options),
+    TransformDirectivesPlugin(context),
   ]
   return plugins;
 }
 
-async function initUno(configOrPath?: UserConfig | string) {
-  const { config } = await loadConfig(process.cwd(), configOrPath)
-  return createGenerator(config)
+function initUno(configOrPath?: UserConfig | string): SSUContext {
+  const uno = createGenerator();
+  let ready = reloadConfig();
+
+  async function reloadConfig() {
+    const { config } = await loadConfig(process.cwd(), configOrPath)
+    console.log("setting config");
+    uno.setConfig(config)
+    return config;
+  }
+
+  return {
+    uno,
+    ready,
+  }
+}
+
+export interface SSUContext {
+  uno: UnoGenerator<{}>;
+  ready: Promise<UserConfig<{}>>;
 }

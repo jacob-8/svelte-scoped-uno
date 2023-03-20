@@ -1,21 +1,13 @@
 import type { Plugin, ResolvedConfig } from 'vite'
 import { createFilter } from '@rollup/pluginutils'
-import { type UnoGenerator } from 'unocss'
 import { SvelteScopedUnocssOptions } from './types'
 import { transformClasses } from './transformClasses'
+import { SSUContext } from '.'
 
 const defaultSvelteScopedInclude = [/\.svelte$/, /\.svelte\.md$/, /\.svx$/]
 const defaultExclude = [/\.svelte-kit\/generated/, /node_modules/]
 
-export function TransformClassesPlugin({
-  getUno,
-  options = {},
-}: {
-  getUno?: Promise<UnoGenerator>,
-  options?: SvelteScopedUnocssOptions
-} = { options: {} }): Plugin {
-
-  let uno: UnoGenerator
+export function TransformClassesPlugin({ ready, uno }: SSUContext, options: SvelteScopedUnocssOptions = {}): Plugin {
   let filter = createFilter(defaultSvelteScopedInclude, defaultExclude)
   let viteConfig: ResolvedConfig
 
@@ -25,10 +17,10 @@ export function TransformClassesPlugin({
 
     async configResolved(_viteConfig) {
       viteConfig = _viteConfig
-      uno = await getUno
+      const config = await ready
       filter = createFilter(
-        uno.config.include || defaultSvelteScopedInclude,
-        uno.config.exclude || defaultExclude,
+        config.include || defaultSvelteScopedInclude,
+        config.exclude || defaultExclude,
       )
     },
 
