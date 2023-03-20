@@ -2,17 +2,16 @@ import type { PreprocessorGroup } from 'svelte/types/compiler/preprocess'
 import MagicString from 'magic-string'
 import { loadConfig } from '@unocss/config'
 import { transformDirectives } from '@unocss/transformer-directives'
-import { transformClasses, SvelteScopedUnocssOptions, type UnoGenerator, type UserConfig, type UserConfigDefaults, createGenerator, presetUno } from 'svelte-scoped-uno'
+import { transformClasses, TransformClassesOptions, type UnoGenerator, type UserConfig, type UserConfigDefaults, createGenerator, presetUno } from 'svelte-scoped-uno'
 
 export * from 'svelte-scoped-uno';
 
-// unbuild throws an odd error unknown when trying to extend TransformSFCOptions here so I'm duplicating it's options
-export interface SveltePreprocessUnocssOptions extends SvelteScopedUnocssOptions {
+export interface SveltePreprocessUnocssOptions extends TransformClassesOptions {
   /**
-   * Add hash and combine recognized tokens (optimal for production); set false in dev mode for easy dev tools toggling to allow for design adjustments in the browser
-   * @default true
+   * Prefix for compiled class name. Distinct from the 'uno-' default used in svelte-scoped-uno for clarity.
+   * @default 'spu-'
    */
-  combine?: boolean
+  classPrefix?: string
   /**
    * Run @unocss/transformer-directives on style blocks
    * @default true
@@ -20,13 +19,7 @@ export interface SveltePreprocessUnocssOptions extends SvelteScopedUnocssOptions
   transformDirectives?: boolean
 }
 
-export default function SveltePreprocessUnocss({
-  configOrPath,
-  options,
-}: {
-  configOrPath?: UserConfig | string
-  options?: SveltePreprocessUnocssOptions
-} = { options: {} }): PreprocessorGroup {
+export default function SveltePreprocessUnocss(options: SveltePreprocessUnocssOptions = {}): PreprocessorGroup {
   if (!options.transformDirectives)
     options.transformDirectives = true
   if (!options.classPrefix)
@@ -36,7 +29,7 @@ export default function SveltePreprocessUnocss({
   return {
     markup: async ({ content, filename }) => {
       if (!uno)
-        uno = await init(configOrPath)
+        uno = await init(options.configOrPath)
 
       let code = content
 
@@ -61,7 +54,7 @@ export default function SveltePreprocessUnocss({
     style: async ({ content }) => {
       if (options.transformDirectives) {
         if (!uno)
-          uno = await init(configOrPath)
+          uno = await init(options.configOrPath)
 
         const s = new MagicString(content)
         await transformDirectives(s, uno, {

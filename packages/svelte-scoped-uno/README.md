@@ -1,10 +1,12 @@
 # svelte-scoped-uno
 
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz_small.svg)](https://stackblitz.com/fork/github/jacob-8/svelte-scoped-uno/tree/main/examples/sveltekit-vite-plugin)
+
 ## Setup
 
 ### Install package
 
-- `pnpm add -D svelte-scoped-uno` or `npm i -D svelte-scoped-uno`
+- `npm i -D svelte-scoped-uno`
 
 All exports from `unocss` are reexported from `svelte-scoped-uno` so there's no need to install `unocss`. This will avoid any breaking changes from unocss affecting your project.
 
@@ -24,7 +26,7 @@ export default defineConfig({
 })
 ```
 
-### Add UnoCSS config:
+### Add UnoCSS config
 
 ```ts
 // unocss.config.ts

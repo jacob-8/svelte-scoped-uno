@@ -1,5 +1,7 @@
 # Svelte Scoped UnoCSS
 
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz_small.svg)](https://stackblitz.com/fork/github/jacob-8/svelte-scoped-uno/tree/main/examples/sveltekit-vite-plugin)
+
 A spin-off from [UnoCSS](https://github.com/unocss/unocss) that allows for full-featured scoped utility classes by component.
 
 ## Install

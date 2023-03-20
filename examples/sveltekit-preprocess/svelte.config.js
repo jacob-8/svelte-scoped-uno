@@ -9,9 +9,7 @@ const config = {
 	preprocess: [
 		vitePreprocess(),
 		ScopedUno({
-			options: {
-				classPrefix: 'me-'
-			}
+			classPrefix: 'me-',
 		}),
 	],
 
@@ -20,10 +18,10 @@ const config = {
 	},
 
 	vitePlugin: {
-    experimental: {
-      inspector: true,
-    },
-  },
+		experimental: {
+			inspector: true,
+		},
+	},
 };
 
 export default config;

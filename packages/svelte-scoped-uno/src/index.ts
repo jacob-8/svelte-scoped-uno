@@ -10,14 +10,8 @@ export * from './types.d.js'
 export * from 'unocss'
 export { transformClasses } from './transformClasses'
 
-export default function SvelteScopedUnoPlugin({
-  configOrPath,
-  options = {},
-}: {
-  configOrPath?: UserConfig | string
-  options?: SvelteScopedUnocssOptions
-} = { options: {} }): Plugin[] {
-  const context = initUno(configOrPath);
+export default function SvelteScopedUnoPlugin(options: SvelteScopedUnocssOptions = {}): Plugin[] {
+  const context = initUno(options.configOrPath);
 
   const plugins: Plugin[] = [
     GlobalStylesPlugin(context),

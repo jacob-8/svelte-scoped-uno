@@ -23,4 +23,8 @@ export interface SvelteScopedUnocssOptions {
    * Hash function
    */
   hashFn?: (str: string) => string
+  /**
+   * UnoCSS config or path to config file. If not provided, will load config unocss.config.ts/js. It's recommended to use the separate config file if you are having trouble with the UnoCSS extension in VSCode.
+   */
+  configOrPath?: UserConfig | string
 }
