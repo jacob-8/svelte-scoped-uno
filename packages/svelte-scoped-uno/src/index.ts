@@ -6,6 +6,7 @@ import { transformSvelteSFC } from './transform'
 import { generateGlobalCss, isServerHooksFile, checkTransformPageChunkHook, replaceGlobalStylesPlaceholder, replacePlaceholderWithPreflightsAndSafelist } from './global'
 import { PLACEHOLDER_USER_SETS_IN_INDEX_HTML } from './constants'
 import { SvelteScopedUnocssOptions } from './types'
+import { TransformDirectivesPlugin } from './transformDirectives'
 
 export * from './transform'
 export * from './types.d.js'
@@ -13,7 +14,21 @@ export * from './types.d.js'
 const defaultSvelteScopedInclude = [/\.svelte$/, /\.svelte\.md$/, /\.svx$/]
 const defaultExclude = [/\.svelte-kit\/generated/, /node_modules/]
 
-export default function SvelteScopedUno({
+export default function SvelteScopedUnoPlugin({
+  configOrPath,
+  options = {},
+}: {
+  configOrPath?: UserConfig | string
+  options?: SvelteScopedUnocssOptions
+} = { options: {} }): Plugin[] {
+  const plugins: Plugin[] = [
+    SvelteScopedUno({ configOrPath, options }),
+    TransformDirectivesPlugin({ configOrPath }),
+  ]
+  return plugins;
+}
+
+export function SvelteScopedUno({
   configOrPath,
   options = {},
 }: {
