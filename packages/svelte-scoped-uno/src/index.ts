@@ -1,6 +1,6 @@
 import type { Plugin, ResolvedConfig } from 'vite'
 import { createFilter } from '@rollup/pluginutils'
-import { type UnoGenerator, type UserConfig, createGenerator } from '@unocss/core'
+import { type UnoGenerator, type UserConfig, createGenerator } from 'unocss'
 import { loadConfig } from '@unocss/config'
 import { transformSvelteSFC } from './transform'
 import { generateGlobalCss, isServerHooksFile, checkTransformPageChunkHook, replaceGlobalStylesPlaceholder, replacePlaceholderWithPreflightsAndSafelist } from './global'
@@ -11,7 +11,7 @@ export * from './transform'
 export * from './types.d.js'
 
 const defaultSvelteScopedInclude = [/\.svelte$/, /\.svelte\.md$/, /\.svx$/]
-const defaultExclude = []
+const defaultExclude = [/\.svelte-kit\/generated/, /node_modules/]
 
 export default function SvelteScopedUno({
   configOrPath,

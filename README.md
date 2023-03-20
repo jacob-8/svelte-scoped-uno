@@ -287,12 +287,12 @@ To try this out in the example project here, install and then run dev.
 ## Notes
 
 - In development, individual classes will be retained and hashed in place for ease of toggling on and off in your browser's developer tools. `class="mb-1 mr-1"` will turn into something like `class="_mb-1_9hwi32 _mr-1_84jfy4`. In production, these will be compiled into a single class name using your desired prefix, `uno-` by default, and a hash based on the filename + class names, e.g. `class="uno-84dke3`.
-- Vite plugins can't yet be used to preprocess files emitted by `svelte-package` as it does not use Vite. Follow https://github.com/sveltejs/vite-plugin-svelte/issues/475 to see when this will be made possible. In the [svelte-preprocess-unocess](./packages/svelte-preprocess-unocss/README.md) was published to enable using `svelte-scoped-uno` in component libraries and other context that don't use Vite.
+- Vite plugins can't yet be used to preprocess files emitted by `svelte-package` as it does not use Vite. Follow https://github.com/sveltejs/vite-plugin-svelte/issues/475 to see when this will be made possible. In the meantime[svelte-preprocess-unocess](./packages/svelte-preprocess-unocss/README.md) was published to enable using `svelte-scoped-uno` in component libraries and other context that don't use Vite.
 - [UnoCSS Inspector doesn't work yet](https://github.com/unocss/unocss/issues/1718). PR's welcome! You would need to study how the `unocss:global` global does it by adding tokens to the tasks array via `tasks.push(extract(code, filename))`
 - If you update the config during dev, you'll need to restart your server to see the updated changes, this could be solved by using Uno's ConfigHMRPlugin
 
 ## Known Issues
 
-- Having a commented out style tag (e.g. `<!-- <style>...</style> -->`) will prevent styles working for that component as they will be placed inside a useless tag. `svelte-scoped` mode should ignore comments include `class="mr-1"` sort of strings defined inside comments
-- Classes referenced in explanatory markdown documentation that is parsed by MDSvex will be transformed contrary to expectation (and styles will be needlessly added). `svelte-scoped` mode should ignore code blocks (whether inline surround by single backticks and multiple lines surrounded by three backticks)
-- Placing `dark:` prefixed styles in a component with `<style global></style>` will not work. If anyone wants to fix, they can look at the compiled Svelte output and go from there.
+- Should ignore `class="mr-1"` type of strings defined inside comments
+- Classes referenced in explanatory markdown documentation that is parsed by MDSvex will be transformed contrary to expectation (and styles will be needlessly added). This package should ignore code blocks (whether inline surrounded by single backticks and multiple lines surrounded by three backticks)
+- Placing `dark:` prefixed styles in a component with `<style global></style>` will not work. Not sure if this is relevant anymore with the move away from using `<style global>` in that `vite-preprocess` doesn't support this feature.
