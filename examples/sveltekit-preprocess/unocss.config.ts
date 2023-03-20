@@ -1,6 +1,6 @@
 // UnoCSS config options can also be placed in vite.config.ts, but make sure to at least have a blank unocss.config.ts if you are having trouble getting the UnoCSS VSCode extension to work
 
-import { defineConfig, presetIcons, presetTypography, presetUno, presetWebFonts } from 'svelte-scoped-uno'
+import { defineConfig, presetIcons, presetTypography, presetUno, presetWebFonts } from 'svelte-preprocess-unocss'
 
 export default defineConfig({
   shortcuts: [

@@ -8,6 +8,7 @@ import { GlobalStylesPlugin } from './globalStylesPlugin'
 
 export * from './types.d.js'
 export * from 'unocss'
+export { transformClasses } from './transformClasses'
 
 export default function SvelteScopedUnoPlugin({
   configOrPath,

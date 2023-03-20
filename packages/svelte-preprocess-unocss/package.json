@@ -36,8 +36,6 @@
   },
   "dependencies": {
     "@unocss/config": "^0.50.6",
-    "@unocss/core": "^0.50.6",
-    "@unocss/preset-uno": "^0.50.6",
     "@unocss/transformer-directives": "^0.50.6",
     "magic-string": "^0.26.6",
     "svelte-scoped-uno": "^0.0.1"

@@ -4,8 +4,10 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm stub",
-    "try:sveltekit": "pnpm --filter svelte-scoped-uno-sveltekit-vite-plugin-example dev",
-    "try:svelte": "pnpm --filter svelte-scoped-uno-svelte-vite-plugin-example dev",
+    "try:sveltekit": "pnpm --filter sveltekit-vite-plugin-example dev",
+    "try:svelte": "pnpm --filter svelte-vite-plugin-example dev",
+    "try:library": "pnpm --filter sveltekit-preprocess-example dev",
+    "package:library": "pnpm --filter sveltekit-preprocess-example package",
     "build": "pnpm --recursive --filter=./packages/* run build",
     "stub": "pnpm --recursive --filter=./packages/* --parallel run stub",
     "test": "pnpm --filter svelte-scoped-uno test",

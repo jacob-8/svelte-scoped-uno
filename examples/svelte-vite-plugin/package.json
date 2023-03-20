@@ -1,5 +1,5 @@
 {
-  "name": "svelte-scoped-uno-svelte-vite-plugin-example",
+  "name": "@svelte-scoped-uno/svelte-vite-plugin-example",
   "type": "module",
   "version": "0.0.0",
   "scripts": {

@@ -1,10 +1,10 @@
 import type { PreprocessorGroup } from 'svelte/types/compiler/preprocess'
 import MagicString from 'magic-string'
-import { type UnoGenerator, type UserConfig, type UserConfigDefaults, createGenerator } from '@unocss/core'
 import { loadConfig } from '@unocss/config'
-import presetUno from '@unocss/preset-uno'
 import { transformDirectives } from '@unocss/transformer-directives'
-import { transformSvelteSFC, SvelteScopedUnocssOptions } from 'svelte-scoped-uno'
+import { transformClasses, SvelteScopedUnocssOptions, type UnoGenerator, type UserConfig, type UserConfigDefaults, createGenerator, presetUno } from 'svelte-scoped-uno'
+
+export * from 'svelte-scoped-uno';
 
 // unbuild throws an odd error unknown when trying to extend TransformSFCOptions here so I'm duplicating it's options
 export interface SveltePreprocessUnocssOptions extends SvelteScopedUnocssOptions {
@@ -22,11 +22,11 @@ export interface SveltePreprocessUnocssOptions extends SvelteScopedUnocssOptions
 
 export default function SveltePreprocessUnocss({
   configOrPath,
-  options = {},
+  options,
 }: {
   configOrPath?: UserConfig | string
-  options: SveltePreprocessUnocssOptions
-}): PreprocessorGroup {
+  options?: SveltePreprocessUnocssOptions
+} = { options: {}}): PreprocessorGroup {
   if (!options.transformDirectives)
     options.transformDirectives = true
 
@@ -38,7 +38,7 @@ export default function SveltePreprocessUnocss({
 
       let code = content
 
-      const result = await transformSvelteSFC({ code, id: filename || '', uno, options })
+      const result = await transformClasses({ code, id: filename || '', uno, options })
 
       if (result?.code)
         code = result.code
@@ -56,19 +56,19 @@ export default function SveltePreprocessUnocss({
       }
     },
 
-    // style: async ({ content }) => {
-    //   if (options.transformDirectives) {
-    //     if (!uno)
-    //       uno = await init(configOrPath)
+    style: async ({ content }) => {
+      if (options.transformDirectives) {
+        if (!uno)
+          uno = await init(configOrPath)
 
-    //     const s = new MagicString(content)
-    //     await transformDirectives(s, uno, {
-    //       varStyle: '--at-',
-    //     })
-    //     if (s.hasChanged())
-    //       return { code: s.toString() }
-    //   }
-    // },
+        const s = new MagicString(content)
+        await transformDirectives(s, uno, {
+          varStyle: '--at-',
+        })
+        if (s.hasChanged())
+          return { code: s.toString() }
+      }
+    },
   }
 }
 
