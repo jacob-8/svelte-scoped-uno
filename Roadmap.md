@@ -1,7 +1,7 @@
 # Roadmap
 
 - use in kitbook
-- improve package example and add stackblitz link
+- improve package example
 - close UnoCSS PRs and update notices there about this package
 - update temp-s-p-u with link to updated preprocessor
 - think about preflights and safelist in packaged libraries that are consumed by apps not using svelte-scoped-uno
