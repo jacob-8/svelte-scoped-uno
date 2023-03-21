@@ -1,7 +1,0 @@
-{
-  "changelog": "@changesets/changelog-github",
-  "commit": false,
-  "linked": [
-    ["svelte-preprocess-unocss", "svelte-scoped-uno"]
-  ]
-}

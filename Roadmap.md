@@ -1,7 +1,6 @@
 # Roadmap
 
 - use in kitbook
-
 - improve package example and add stackblitz link
 - close UnoCSS PRs and update notices there about this package
 - update temp-s-p-u with link to updated preprocessor
