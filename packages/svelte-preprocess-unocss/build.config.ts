@@ -14,7 +14,6 @@ export default defineBuildConfig({
     '@unocss/transformer-directives',
   ],
   rollup: {
-    // inlineDependencies: true, // remove for real thing as it's unneeded
     emitCJS: true,
   },
 })

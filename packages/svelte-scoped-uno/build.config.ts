@@ -18,7 +18,7 @@ export default defineBuildConfig({
     'svelte',
     'vite',
   ],
-  // rollup: {
-  //   emitCJS: true,
-  // },
+  rollup: {
+    emitCJS: true,
+  },
 })

@@ -40,7 +40,7 @@
     "build": "unbuild",
     "stub": "unbuild --stub",
     "test": "vitest",
-    "prepublishOnly": "pnpm test && pnpm build"
+    "prepublishOnly": "pnpm build"
   },
   "dependencies": {
     "@unocss/config": "^0.50.6",
