@@ -1,7 +1,7 @@
 {
 	"name": "@svelte-scoped-uno/sveltekit-preprocess-example",
 	"version": "0.0.1",
-  "private": "true",
+	"private": "true",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -26,16 +26,16 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
-		"@sveltejs/kit": "^1.5.0",
+		"@sveltejs/kit": "^1.13.0",
 		"@sveltejs/package": "^2.0.0",
 		"publint": "^0.1.9",
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.0.1",
 		"svelte-preprocess-unocss": "^0.0.1",
 		"tslib": "^2.4.1",
-		"typescript": "^4.9.3",
-		"vite": "^4.0.0",
-		"vitest": "^0.25.3"
+		"typescript": "^5.0.2",
+		"vite": "^4.2.1",
+		"vitest": "^0.29.7"
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",

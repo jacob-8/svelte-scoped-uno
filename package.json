@@ -12,7 +12,8 @@
     "stub": "pnpm --recursive --filter=./packages/* --parallel run stub",
     "test": "pnpm --filter svelte-scoped-uno test",
     "test:all": "pnpm --recursive --stream test -- --run",
-    "release": "changeset publish"
+    "release": "changeset publish",
+		"check-packages": "pnpm update --interactive --recursive --latest"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.0"

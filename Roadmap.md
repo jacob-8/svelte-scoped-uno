@@ -1,8 +1,9 @@
 # Roadmap
 
-- close UnoCSS PRs and update notices there about this package
 - improve package example
 - update temp-s-p-u with link to updated preprocessor
+- follow odd issue in stackblitz
+- close UnoCSS PRs and update notices there about this package
 - think about preflights and safelist in packaged libraries that are consumed by apps not using svelte-scoped-uno
 - add issue to UnoCSS to deal with empty class having just a semicolon when using transformer:
 ```css
