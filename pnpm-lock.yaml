@@ -18,7 +18,7 @@ importers:
       marked: ^4.2.12
       svelte: ^3.55.0
       svelte-check: ^3.0.1
-      svelte-scoped-uno: ^0.0.1
+      svelte-scoped-uno: ^0.0.2
       tslib: ^2.4.1
       typescript: ^5.0.2
       vite: ^4.2.1
@@ -44,7 +44,7 @@ importers:
       publint: ^0.1.9
       svelte: ^3.54.0
       svelte-check: ^3.0.1
-      svelte-preprocess-unocss: ^0.0.1
+      svelte-preprocess-unocss: ^0.0.2
       tslib: ^2.4.1
       typescript: ^5.0.2
       vite: ^4.2.1
@@ -72,7 +72,7 @@ importers:
       marked: ^4.2.12
       svelte: ^3.55.0
       svelte-check: ^3.0.1
-      svelte-scoped-uno: ^0.0.1
+      svelte-scoped-uno: ^0.0.2
       tslib: ^2.4.1
       typescript: ^5.0.2
       vite: ^4.2.1
@@ -97,7 +97,7 @@ importers:
       '@vitest/ui': ^0.29.7
       magic-string: ^0.26.6
       svelte: ^3.57.0
-      svelte-scoped-uno: ^0.0.1
+      svelte-scoped-uno: ^0.0.2
       typescript: ^5.0.2
       unbuild: ^1.0.2
       vite: ^4.2.1
