@@ -37,7 +37,7 @@
     "build": "unbuild",
     "stub": "unbuild --stub",
     "test": "vitest",
-    "prepublishOnly": "pnpm test && pnpm build"
+    "prepublishOnly": "vitest run && pnpm build"
   },
   "dependencies": {
     "@rollup/pluginutils": "^5.0.2",
