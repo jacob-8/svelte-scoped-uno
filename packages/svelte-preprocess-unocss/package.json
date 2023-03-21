@@ -1,6 +1,6 @@
 {
   "name": "svelte-preprocess-unocss",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Run UnoCSS in svelte-scoped mode via a svelte-preprocessor for use in component libraries",
   "keywords": [
     "sveltekit",
@@ -46,7 +46,7 @@
     "@unocss/config": "^0.50.6",
     "@unocss/transformer-directives": "^0.50.6",
     "magic-string": "^0.26.6",
-    "svelte-scoped-uno": "^0.0.1"
+    "svelte-scoped-uno": "^0.0.2"
   },
   "devDependencies": {
     "@vitest/ui": "^0.29.7",

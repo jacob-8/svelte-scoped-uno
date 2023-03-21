@@ -31,7 +31,7 @@
 		"publint": "^0.1.9",
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.0.1",
-		"svelte-preprocess-unocss": "^0.0.1",
+		"svelte-preprocess-unocss": "^0.0.2",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.2",
 		"vite": "^4.2.1",
