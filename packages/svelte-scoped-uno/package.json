@@ -2,10 +2,18 @@
   "name": "svelte-scoped-uno",
   "version": "0.0.1",
   "description": "Use UnoCSS utility styles in a modular fashion in Svelte, with styles being stored only where needed.",
+  "keywords": [
+    "sveltekit",
+    "svelte",
+    "unocss",
+    "utility-styles",
+    "component-scoped",
+    "tailwind"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jacob-8/svelte-scoped-uno.git",
-    "directory": "packages/svelte-preprocess-unocss"
+    "directory": "packages/svelte-scoped-uno"
   },
   "bugs": {
     "url": "https://github.com/jacob-8/svelte-scoped-uno/issues"
@@ -29,8 +37,7 @@
     "build": "unbuild",
     "stub": "unbuild --stub",
     "test": "vitest",
-    "test:ui": "vitest --ui",
-    "release": "pnpm test && standard-version && git push --follow-tags && pnpm publish"
+    "prepublishOnly": "pnpm test && pnpm build"
   },
   "dependencies": {
     "@rollup/pluginutils": "^5.0.2",

@@ -2,6 +2,15 @@
   "name": "svelte-preprocess-unocss",
   "version": "0.0.1",
   "description": "Run UnoCSS in svelte-scoped mode via a svelte-preprocessor for use in component libraries",
+  "keywords": [
+    "sveltekit",
+    "svelte",
+    "unocss",
+    "utility-styles",
+    "component-scoped",
+    "component-library",
+    "tailwind"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jacob-8/svelte-scoped-uno.git",
@@ -31,8 +40,7 @@
     "build": "unbuild",
     "stub": "unbuild --stub",
     "test": "vitest",
-    "test:ui": "vitest --ui",
-    "release": "pnpm test && standard-version && git push --follow-tags && pnpm publish"
+    "prepublishOnly": "pnpm test && pnpm build"
   },
   "dependencies": {
     "@unocss/config": "^0.50.6",

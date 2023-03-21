@@ -1,8 +1,5 @@
 # Roadmap
 
-- update tags, keywords
-- publish to npm 
-- add changelog
 - use in kitbook
 
 - improve package example and add stackblitz link
