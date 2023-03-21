@@ -6,7 +6,9 @@
 
 ### Install package
 
-- `npm i -D svelte-scoped-uno`
+```bash
+npm i -D svelte-scoped-uno
+```
 
 All exports from `unocss` are reexported from `svelte-scoped-uno` so there's no need to install `unocss`. This will avoid any breaking changes from unocss affecting your project.
 
@@ -16,7 +18,7 @@ All exports from `unocss` are reexported from `svelte-scoped-uno` so there's no 
 // vite.config.ts
 import { defineConfig } from 'vite'
 import { sveltekit } from '@sveltejs/kit/vite'
-+import SvelteScopedUno from 'svelte-scoped-uno'
++import { SvelteScopedUno } from 'svelte-scoped-uno'
 
 export default defineConfig({
   plugins: [

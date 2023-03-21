@@ -6,7 +6,10 @@
 	<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<link rel="stylesheet" href="%sveltekit.assets%/tailwind-reset.css">
+	<!-- If you have your preferred styles reset and don't want to use the option one provided by svelte-scoped-uno, add that first  -->
+
+	<!-- Then the global styles from svelte-scoped-uno (optional reset, preflights and safelists). These are inlined in dev, added as a cacheable hashed css file in build. -->
+	%svelte-scoped-uno.global%
 
 	%sveltekit.head%
 </head>

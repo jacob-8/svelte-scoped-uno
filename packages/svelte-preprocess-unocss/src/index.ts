@@ -19,7 +19,7 @@ export interface SveltePreprocessUnocssOptions extends TransformClassesOptions {
   transformDirectives?: boolean
 }
 
-export default function SveltePreprocessUnocss(options: SveltePreprocessUnocssOptions = {}): PreprocessorGroup {
+export function PreprocessUnocss(options: SveltePreprocessUnocssOptions = {}): PreprocessorGroup {
   if (!options.transformDirectives)
     options.transformDirectives = true
   if (!options.classPrefix)

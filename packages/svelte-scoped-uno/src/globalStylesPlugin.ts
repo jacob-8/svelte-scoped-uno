@@ -56,7 +56,6 @@ export function GlobalStylesPlugin({ ready, uno }: SSUContext, addReset?: 'tailw
         return replaceGlobalStylesPlaceholder(code, unoCssHashedLinkTag)
     },
 
-
     // serve and build
     async transformIndexHtml(html) {
       // SvelteKit (as of 1.2.0) ignores this hook, so we use the `renderChunk` and `transform` hooks instead for SvelteKit, but if they ever support running this hook inside their hooks.server.js file we can simplify to just using this hook.

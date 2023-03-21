@@ -18,7 +18,7 @@ Run [svelte-scoped-uno](https://github.com/jacob-8/svelte-scoped-uno)
 import adapter from '@sveltejs/adapter-auto'
 import { vitePreprocess } from '@sveltejs/kit/vite';
 
-+import ScopedUno from 'svelte-preprocess-unocss'
++import { PreprocessUnocss } from 'svelte-preprocess-unocss'
 
 +// If wanting to keep classes distinct during dev, turn your build/package script into `cross-env NODE_ENV=production svelte-kit sync && svelte-package`. Requires `cross-env` as a `devDependency`.
 +const mode = process.env.NODE_ENV
@@ -28,7 +28,7 @@ import { vitePreprocess } from '@sveltejs/kit/vite';
 const config = {
   preprocess: [
     preprocess(),
-+   ScopedUno({
++   PreprocessUnocss({
 +     classPrefix: 'sk-', // default: 'spu-'
 +     combine: prod,
 +   }),

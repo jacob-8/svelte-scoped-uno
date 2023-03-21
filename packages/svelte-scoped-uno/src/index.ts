@@ -10,18 +10,22 @@ export * from './types.d.js'
 export * from 'unocss'
 export { transformClasses } from './transformClasses'
 
-export default function SvelteScopedUnoPlugin(options: SvelteScopedUnocssOptions = {}): Plugin[] {
+export function SvelteScopedUno(options: SvelteScopedUnocssOptions = {}): Plugin[] {
   const context = initUno(options.configOrPath);
 
   const plugins: Plugin[] = [
     GlobalStylesPlugin(context, options.addReset),
-    TransformClassesPlugin(context, options),
-    TransformDirectivesPlugin(context),
   ]
+
+  if (!options.onlyGlobal) {
+    plugins.push(TransformClassesPlugin(context, options))
+    plugins.push(TransformDirectivesPlugin(context))
+  }
+
   return plugins;
 }
 
-function initUno(configOrPath?: UserConfig | string): SSUContext {
+export function initUno(configOrPath?: UserConfig | string): SSUContext {
   const uno = createGenerator();
   let ready = reloadConfig();
 

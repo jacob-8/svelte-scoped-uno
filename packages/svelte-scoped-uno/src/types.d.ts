@@ -26,10 +26,15 @@ export interface SvelteScopedUnocssOptions {
   /**
    * Prefix for compiled class name
    * @default 'uno-'
-   */
-  classPrefix?: string
+  */
+ classPrefix?: string
   /**
    * Used to generate hash for compiled class names
-   */
+  */
   hashFn?: (str: string) => string
+  /**
+   * Use in conjunction with `svelte-preprocess-unocss` to add needed global styles for your library demo app: resets, preflights, and safelist
+   * @default false
+  */
+  onlyGlobal?: boolean
 }
