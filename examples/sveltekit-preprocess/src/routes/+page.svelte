@@ -14,3 +14,5 @@
 
   <Button onclick={() => alert("hello!")}>Hello</Button>
 </div>
+
+<div class="logo bg-red" />

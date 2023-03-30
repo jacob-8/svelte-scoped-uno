@@ -1,7 +1,43 @@
 {
   "name": "svelte-preprocess-unocss",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Run UnoCSS in svelte-scoped mode via a svelte-preprocessor for use in component libraries",
+  "type": "module",
+  "scripts": {
+    "build": "unbuild",
+    "stub": "unbuild --stub",
+    "test": "vitest",
+    "prepublishOnly": "pnpm build"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@unocss/config": "^0.50.6",
+    "@unocss/transformer-directives": "^0.50.6",
+    "magic-string": "^0.26.6",
+    "svelte-scoped-uno": "^0.0.3"
+  },
+  "devDependencies": {
+    "@vitest/ui": "^0.29.8",
+    "prettier": "^2.8.7",
+    "prettier-plugin-svelte": "^2.10.0",
+    "svelte": "^3.57.0",
+    "typescript": "^5.0.2",
+    "unbuild": "^1.0.2",
+    "vite": "^4.2.1",
+    "vitest": "^0.29.8"
+  },
   "keywords": [
     "sveltekit",
     "svelte",
@@ -21,39 +57,5 @@
   },
   "homepage": "https://polylingual.dev",
   "license": "MIT",
-  "author": "Jacob Bowdoin",
-  "type": "module",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
-  },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "build": "unbuild",
-    "stub": "unbuild --stub",
-    "test": "vitest",
-    "prepublishOnly": "pnpm build"
-  },
-  "dependencies": {
-    "@unocss/config": "^0.50.6",
-    "@unocss/transformer-directives": "^0.50.6",
-    "magic-string": "^0.26.6",
-    "svelte-scoped-uno": "^0.0.2"
-  },
-  "devDependencies": {
-    "@vitest/ui": "^0.29.7",
-    "svelte": "^3.57.0",
-    "typescript": "^5.0.2",
-    "unbuild": "^1.0.2",
-    "vite": "^4.2.1",
-    "vitest": "^0.29.7"
-  }
+  "author": "Jacob Bowdoin"
 }

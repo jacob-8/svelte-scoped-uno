@@ -1,5 +1,11 @@
 # svelte-scoped-uno
 
+## 0.0.3
+
+### Patch Changes
+
+- fix: include @unocss/preset-icons as dependency to make icons work
+
 ## 0.0.2
 
 ### Patch Changes

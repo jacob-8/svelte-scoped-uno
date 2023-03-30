@@ -1,6 +1,6 @@
 {
   "name": "svelte-scoped-uno",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Use UnoCSS utility styles in a modular fashion in Svelte, with styles being stored only where needed.",
   "keywords": [
     "sveltekit",
@@ -42,19 +42,20 @@
   "dependencies": {
     "@rollup/pluginutils": "^5.0.2",
     "@unocss/config": "^0.50.6",
+    "@unocss/preset-icons": "^0.50.6",
     "@unocss/transformer-directives": "^0.50.6",
     "magic-string": "^0.26.6",
     "unocss": "^0.50.6"
   },
   "devDependencies": {
     "@iconify-json/logos": "^1.1.23",
-    "@vitest/ui": "^0.29.7",
-    "prettier": "^2.8.5",
-    "prettier-plugin-svelte": "^2.9.0",
+    "@vitest/ui": "^0.29.8",
+    "prettier": "^2.8.7",
+    "prettier-plugin-svelte": "^2.10.0",
     "svelte": "^3.57.0",
     "typescript": "^5.0.2",
     "unbuild": "^1.0.2",
     "vite": "^4.2.1",
-    "vitest": "^0.29.7"
+    "vitest": "^0.29.8"
   }
 }
