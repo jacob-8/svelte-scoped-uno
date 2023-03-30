@@ -3,7 +3,7 @@ import { preprocess } from 'svelte/compiler';
 import { PreprocessUnocss } from './index.js';
 import { format as prettier } from 'prettier'
 import prettierSvelte from 'prettier-plugin-svelte'
-import { presetIcons } from 'svelte-scoped-uno';
+import { presetIcons, presetUno } from 'svelte-scoped-uno';
 
 describe('preprocessor', () => {
   async function transform(code: string): Promise<string> {
@@ -13,6 +13,7 @@ describe('preprocessor', () => {
           { logo: 'i-logos:svelte-icon w-7em h-7em transform transition-300' },
         ],
         presets: [
+          presetUno(),
           presetIcons({
             prefix: 'i-',
             extraProperties: {
@@ -29,19 +30,34 @@ describe('preprocessor', () => {
     }).trim()
   }
 
-  test.only('at directives', async () => {
+  test('--at-apply directives', async () => {
+    const code = `<div />
+    <style>
+      div {
+        --at-apply: bg-red-100;
+      }
+    </style>`.trim();
+    const result = await transform(code);
+    expect(result).toMatchInlineSnapshot(`
+      "<div />
+
+      <style>
+        div {
+          --un-bg-opacity: 1;
+          background-color: rgba(254, 226, 226, var(--un-bg-opacity));
+        }
+      </style>"
+    `);
+  });
+
+  // TODO: solve this
+  test('dark does not work using --at-apply as seen in the output, that needs written inline', async () => {
     const inputFile = readFileSync('./src/fixtures/input/Button.svelte', 'utf-8');
     const result = await transform(inputFile);
     writeFileSync('./src/fixtures/output/Button.svelte', result, 'utf-8');
   });
 
-  test('handles Button', async () => {
-    const inputFile = readFileSync('./src/fixtures/input/Button.svelte', 'utf-8');
-    const result = await transform(inputFile);
-    writeFileSync('./src/fixtures/output/Button.svelte', result, 'utf-8');
-  });
-
-  test('icons work', async () => {
+  test('icons', async () => {
     const component = `<span class="i-logos:svelte-icon" />`;
     const result = await transform(component);
     expect(result).not.toEqual(component);
@@ -63,6 +79,19 @@ describe('preprocessor', () => {
           vertical-align: middle;
           width: 1em;
           height: 1em;
+          width: 7em;
+          height: 7em;
+          transform: translateX(var(--un-translate-x))
+            translateY(var(--un-translate-y)) translateZ(var(--un-translate-z))
+            rotate(var(--un-rotate)) rotateX(var(--un-rotate-x))
+            rotateY(var(--un-rotate-y)) rotateZ(var(--un-rotate-z))
+            skewX(var(--un-skew-x)) skewY(var(--un-skew-y)) scaleX(var(--un-scale-x))
+            scaleY(var(--un-scale-y)) scaleZ(var(--un-scale-z));
+          transition-property: color, background-color, border-color, outline-color,
+            text-decoration-color, fill, stroke, opacity, box-shadow, transform,
+            filter, backdrop-filter;
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          transition-duration: 300ms;
         }
       </style>"
     `);

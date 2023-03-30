@@ -54,12 +54,10 @@ export function PreprocessUnocss(options: SveltePreprocessUnocssOptions = {}): P
     style: async ({ content }) => {
       if (options.transformDirectives) {
         if (!uno)
-          uno = await init(options.configOrPath)
-
+        uno = await init(options.configOrPath)
+        
         const s = new MagicString(content)
-        await transformDirectives(s, uno, {
-          varStyle: '--at-',
-        })
+        await transformDirectives(s, uno, {})
         if (s.hasChanged())
           return { code: s.toString() }
       }
