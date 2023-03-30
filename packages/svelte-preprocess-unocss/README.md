@@ -55,4 +55,20 @@ export default defineConfig({
 })
 ```
 
-All exports from `unocss` are reexported from `svelte-preprocess-unocss` so there's no need to install `unocss`. This will avoid any breaking changes from unocss affecting your project.
+All exports from `unocss` are re-exported from `svelte-preprocess-unocss` so there's no need to install `unocss`. This will avoid any breaking changes from unocss affecting your project.
+
+## Known Issues
+
+Don't use `--at-apply` on classes that need global scoping like `dark:___` as the .dark selector will be placed outside the global selector. For example, this will NOT work:
+
+```css
+:global(.my-box) {
+  --at-apply: dark:bg-red-700;
+}
+```
+
+Instead just apply the class directly, like this:
+
+```html
+<div class="dark:bg-red-700"></div>
+```

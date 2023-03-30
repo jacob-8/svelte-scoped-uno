@@ -4,6 +4,7 @@
 
 ### Patch Changes
 
+- fix: --at-apply works again
 - fix: include @unocss/preset-icons as dependency to make icons work
 - Updated dependencies
   - svelte-scoped-uno@0.0.3
