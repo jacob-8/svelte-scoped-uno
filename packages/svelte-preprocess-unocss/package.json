@@ -7,7 +7,7 @@
     "build": "unbuild",
     "stub": "unbuild --stub",
     "test": "vitest",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "vitest run && pnpm build"
   },
   "exports": {
     ".": {

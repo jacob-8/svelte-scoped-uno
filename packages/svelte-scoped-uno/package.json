@@ -2,26 +2,13 @@
   "name": "svelte-scoped-uno",
   "version": "0.0.3",
   "description": "Use UnoCSS utility styles in a modular fashion in Svelte, with styles being stored only where needed.",
-  "keywords": [
-    "sveltekit",
-    "svelte",
-    "unocss",
-    "utility-styles",
-    "component-scoped",
-    "tailwind"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jacob-8/svelte-scoped-uno.git",
-    "directory": "packages/svelte-scoped-uno"
-  },
-  "bugs": {
-    "url": "https://github.com/jacob-8/svelte-scoped-uno/issues"
-  },
-  "homepage": "https://polylingual.dev",
-  "license": "MIT",
-  "author": "Jacob Bowdoin",
   "type": "module",
+  "scripts": {
+    "build": "unbuild",
+    "stub": "unbuild --stub",
+    "test": "vitest",
+    "prepublishOnly": "vitest run && pnpm build"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -33,12 +20,6 @@
   "files": [
     "dist"
   ],
-  "scripts": {
-    "build": "unbuild",
-    "stub": "unbuild --stub",
-    "test": "vitest",
-    "prepublishOnly": "vitest run && pnpm build"
-  },
   "dependencies": {
     "@rollup/pluginutils": "^5.0.2",
     "@unocss/config": "^0.50.6",
@@ -57,5 +38,24 @@
     "unbuild": "^1.0.2",
     "vite": "^4.2.1",
     "vitest": "^0.29.8"
-  }
+  },
+  "keywords": [
+    "sveltekit",
+    "svelte",
+    "unocss",
+    "utility-styles",
+    "component-scoped",
+    "tailwind"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacob-8/svelte-scoped-uno.git",
+    "directory": "packages/svelte-scoped-uno"
+  },
+  "bugs": {
+    "url": "https://github.com/jacob-8/svelte-scoped-uno/issues"
+  },
+  "homepage": "https://polylingual.dev",
+  "license": "MIT",
+  "author": "Jacob Bowdoin"
 }
