@@ -4,7 +4,7 @@
   "commit": false,
   "fixed": [],
   "linked": [
-    ["svelte-preprocess-unocss", "svelte-scoped-uno"]
+    ["svelte-scoped-uno", "svelte-preprocess-unocss"]
   ],
   "access": "public",
   "baseBranch": "main",
