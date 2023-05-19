@@ -1,5 +1,11 @@
 # svelte-scoped-uno
 
+## 0.1.1
+
+### Patch Changes
+
+- fix misplaced dependency
+
 ## 0.1.0
 
 ### Minor Changes

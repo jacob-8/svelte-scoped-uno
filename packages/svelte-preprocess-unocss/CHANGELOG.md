@@ -1,5 +1,13 @@
 # svelte-preprocess-unocss
 
+## 0.1.1
+
+### Patch Changes
+
+- fix misplaced dependency
+- Updated dependencies
+  - svelte-scoped-uno@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes
