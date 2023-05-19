@@ -7,7 +7,7 @@
     "build": "unbuild",
     "stub": "unbuild --stub",
     "test": "vitest",
-    "prepublishOnly": "vitest run && pnpm build"
+    "prepublishOnly": "pnpm build"
   },
   "exports": {
     ".": {
@@ -32,8 +32,7 @@
     "svelte": "^3.59.1",
     "typescript": "^5.0.4",
     "unbuild": "^1.2.1",
-    "vite": "^4.3.8",
-    "vitest": "^0.31.1"
+    "vite": "^4.3.8"
   },
   "keywords": [
     "sveltekit",

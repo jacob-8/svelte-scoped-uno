@@ -35,7 +35,7 @@ importers:
         specifier: ^3.3.2
         version: 3.3.2(svelte@3.59.1)
       svelte-scoped-uno:
-        specifier: ^0.0.3
+        specifier: ^0.1.0
         version: link:../../packages/svelte-scoped-uno
       tslib:
         specifier: ^2.5.2
@@ -71,7 +71,7 @@ importers:
         specifier: ^3.3.2
         version: 3.3.2(svelte@3.59.1)
       svelte-preprocess-unocss:
-        specifier: ^0.0.3
+        specifier: ^0.1.0
         version: link:../../packages/svelte-preprocess-unocss
       tslib:
         specifier: ^2.5.2
@@ -113,7 +113,7 @@ importers:
         specifier: ^3.3.2
         version: 3.3.2(svelte@3.59.1)
       svelte-scoped-uno:
-        specifier: ^0.0.3
+        specifier: ^0.1.0
         version: link:../../packages/svelte-scoped-uno
       tslib:
         specifier: ^2.5.2
@@ -128,7 +128,7 @@ importers:
   packages/svelte-preprocess-unocss:
     dependencies:
       svelte-scoped-uno:
-        specifier: ^0.0.3
+        specifier: ^0.1.0
         version: link:../svelte-scoped-uno
     devDependencies:
       '@vitest/ui':
@@ -152,9 +152,6 @@ importers:
       vite:
         specifier: ^4.3.8
         version: 4.3.8(@types/node@20.2.1)
-      vitest:
-        specifier: ^0.31.1
-        version: 0.31.1(@vitest/ui@0.31.1)
 
   packages/svelte-scoped-uno:
     dependencies:
