@@ -5,7 +5,6 @@ A spin-off from [UnoCSS](https://github.com/unocss/unocss) that allows for full-
 **Update**: This code is in the process of being merged into UnoCSS: https://github.com/unocss/unocss/pull/2552 - you'll find the [docs](https://deploy-preview-2552--unocss.netlify.app/integrations/svelte-scoped#svelte-scoped) for that version to be more full-featured though of course use the install instructions from here.
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz_small.svg)](https://stackblitz.com/fork/github/jacob-8/svelte-scoped-uno/tree/main/examples/sveltekit-vite-plugin)
-*There is a strange bug just in StackBlitz whereby styles for the Logo and Prose components are not being applied, but it's still a useful way to quickly try things out.*
 
 ## Install
 
