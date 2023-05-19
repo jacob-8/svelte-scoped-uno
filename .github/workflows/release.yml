@@ -27,11 +27,15 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
+      - name: Build
+        run: pnpm -F svelte-scoped-uno build
+      - run: pnpm -F svelte-preprocess-unocss build
+
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
-          # release calls changeset publish which runs the prepublishOnly scripts in each package beforehand to test and build 
+          # release calls changeset publish which runs the prepublishOnly scripts in each package beforehand to test 
           publish: pnpm release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

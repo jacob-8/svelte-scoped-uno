@@ -5,9 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "unbuild",
-    "stub": "unbuild --stub",
-    "test": "vitest",
-    "prepublishOnly": "pnpm build"
+    "stub": "unbuild --stub"
   },
   "exports": {
     ".": {
