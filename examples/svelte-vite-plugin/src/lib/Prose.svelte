@@ -3,7 +3,7 @@
 </script>
 
 <div
-  class="text-base prose prose-purple md:prose-orange  dark:prose-invert max-w-full text-left mt-10 p-3 md:p-5 shadow-lg border rounded"
+  class="text-base prose prose-purple md:prose-orange dark:prose-invert max-w-full text-left mt-10 p-3 md:p-5 shadow-xl border rounded"
 >
   {@html marked(`# Svelte Scoped Uno with Vite + Svelte
   This project has the following **example usages**:
