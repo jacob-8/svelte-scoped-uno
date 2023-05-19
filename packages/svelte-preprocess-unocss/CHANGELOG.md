@@ -1,5 +1,13 @@
 # svelte-preprocess-unocss
 
+## 0.1.3
+
+### Patch Changes
+
+- temp tailwindreset until fixed
+- Updated dependencies
+  - svelte-scoped-uno@0.1.3
+
 ## 0.1.2
 
 ### Patch Changes

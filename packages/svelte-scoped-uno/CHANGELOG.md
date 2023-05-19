@@ -1,5 +1,11 @@
 # svelte-scoped-uno
 
+## 0.1.3
+
+### Patch Changes
+
+- temp tailwindreset until fixed
+
 ## 0.1.2
 
 ### Patch Changes
