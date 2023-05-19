@@ -7,6 +7,16 @@ const _dirname = typeof __dirname !== 'undefined'
   : dirname(fileURLToPath(import.meta.url))
 
 export function getReset(injectReset: string): string {
+  if (injectReset.startsWith("@unocss/reset")) {
+    const resolvedPNPM = resolve(resolve(_dirname, `../node_modules/${injectReset}`));
+    if (isFile(resolvedPNPM))
+      return readFileSync(resolvedPNPM, "utf-8");
+    
+    const resolvedNPM = resolve(process.cwd(), "node_modules", injectReset);
+    return readFileSync(resolvedNPM, "utf-8");
+  }
+
+
   if (injectReset.startsWith('@unocss/reset'))
     return readFileSync(resolve(_dirname, `../node_modules/${injectReset}`), 'utf-8')
 

@@ -1,5 +1,11 @@
 # svelte-scoped-uno
 
+## 0.1.2
+
+### Patch Changes
+
+- update reset resolving for @unocss/resets to handle pnpm and npm
+
 ## 0.1.1
 
 ### Patch Changes
