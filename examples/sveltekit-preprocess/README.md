@@ -21,16 +21,16 @@ npm run dev
 To build your library:
 
 ```bash
-pnpm package
+npm package
 ```
 
 To create a production version of your showcase app:
 
 ```bash
-pnpm build
+npm build
 ```
 
-You can preview the production build with `pnpm preview`.
+You can preview the production build with `npm preview`.
 
 To publish your library to [npm](https://www.npmjs.com):
 

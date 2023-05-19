@@ -14,11 +14,17 @@ export default defineBuildConfig({
   externals: [
     '@unocss/core',
     '@unocss/config',
+    '@unocss/preset-uno',
+    '@unocss/reset',
+    'css-tree',
     '@rollup/pluginutils',
     'svelte',
     'vite',
   ],
   rollup: {
     emitCJS: true,
+  },
+  replace: {
+    'import.meta.vitest': 'undefined',
   },
 })

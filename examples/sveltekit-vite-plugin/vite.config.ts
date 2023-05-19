@@ -5,7 +5,7 @@ import { SvelteScopedUno } from 'svelte-scoped-uno'
 export default defineConfig({
   plugins: [
     SvelteScopedUno({
-      addReset: 'tailwind',
+      injectReset: "@unocss/reset/tailwind.css"
     }),
     sveltekit(),
   ],

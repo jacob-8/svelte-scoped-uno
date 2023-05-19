@@ -22,22 +22,23 @@
   ],
   "dependencies": {
     "@rollup/pluginutils": "^5.0.2",
-    "@unocss/config": "^0.50.6",
-    "@unocss/preset-icons": "^0.50.6",
-    "@unocss/transformer-directives": "^0.50.6",
+    "@unocss/config": "^0.51.13",
+    "@unocss/preset-icons": "^0.51.13",
     "magic-string": "^0.26.6",
-    "unocss": "^0.50.6"
+    "unocss": "^0.51.13"
   },
   "devDependencies": {
-    "@iconify-json/logos": "^1.1.23",
-    "@vitest/ui": "^0.29.8",
-    "prettier": "^2.8.7",
+    "@iconify-json/logos": "^1.1.31",
+    "@unocss/reset": "^0.51.13",
+    "@vitest/ui": "^0.31.1",
+    "css-tree": "^2.3.1",
+    "prettier": "^2.8.8",
     "prettier-plugin-svelte": "^2.10.0",
-    "svelte": "^3.57.0",
-    "typescript": "^5.0.2",
-    "unbuild": "^1.0.2",
-    "vite": "^4.2.1",
-    "vitest": "^0.29.8"
+    "svelte": "^3.59.1",
+    "typescript": "^5.0.4",
+    "unbuild": "^1.2.1",
+    "vite": "^4.3.8",
+    "vitest": "^0.31.1"
   },
   "keywords": [
     "sveltekit",

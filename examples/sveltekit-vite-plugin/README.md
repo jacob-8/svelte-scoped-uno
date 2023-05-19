@@ -6,4 +6,5 @@ Read more about [svelte-scoped-uno](../../packages/svelte-scoped-uno/README.md) 
 *There is a strange bug just in StackBlitz whereby styles for the Logo and Prose components are not being applied, but it's still a useful way to quickly try things out.*
 
 ## Try Locally
-- In the root of the monorepo run `pnpm install` and `pnpm try:sveltekit` or just run `npm install` and `npm run dev` from this directory if you don't use pnpm.
+- PNPM: In the root of the monorepo run `pnpm install`, `pnpm stub` and `pnpm try:sveltekit` 
+- NPM: From this directory run `npm install` and `npm run dev`

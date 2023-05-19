@@ -7,7 +7,7 @@ export default defineConfig({
 		// it's unnessary to use SvelteScopedUno here as we are using the preprocessor, but I'm adding it to conveniently provide a reset and preflights to my demo app - you can toggle this behavior by setting `onlyGlobal` to `true`
 		SvelteScopedUno({
 			onlyGlobal: true,
-			addReset: 'tailwind',
+			injectReset: "@unocss/reset/tailwind.css"
 		}),
 		sveltekit()
 	],

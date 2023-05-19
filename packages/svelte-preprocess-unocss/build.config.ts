@@ -11,7 +11,6 @@ export default defineBuildConfig({
     '@unocss/core',
     '@unocss/config',
     '@unocss/preset-uno',
-    '@unocss/transformer-directives',
   ],
   rollup: {
     emitCJS: true,

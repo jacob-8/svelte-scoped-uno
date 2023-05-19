@@ -10,10 +10,8 @@ const config = {
   },
 
   vitePlugin: {
-    experimental: {
-      inspector: {
-        showToggleButton: 'always',
-      },
+    inspector: {
+      showToggleButton: 'always',
     },
   },
 }

@@ -5,10 +5,8 @@ const config = {
   preprocess: vitePreprocess(),
 
   vitePlugin: {
-    experimental: {
-      inspector: {
-        showToggleButton: 'always',
-      },
+    inspector: {
+      showToggleButton: 'always',
     },
   },
 }

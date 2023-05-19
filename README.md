@@ -1,6 +1,8 @@
 # Svelte Scoped UnoCSS
 
-A spin-off from [UnoCSS](https://github.com/unocss/unocss) that allows for full-featured scoped utility classes by component.
+A spin-off from [UnoCSS](https://github.com/unocss/unocss) that allows for full-featured scoped utility classes by component. 
+
+**Update**: This code is in the process of being merged into UnoCSS: https://github.com/unocss/unocss/pull/2552 - you'll find the [docs](https://deploy-preview-2552--unocss.netlify.app/integrations/svelte-scoped#svelte-scoped) for that version to be more full-featured though of course use the install instructions from here.
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz_small.svg)](https://stackblitz.com/fork/github/jacob-8/svelte-scoped-uno/tree/main/examples/sveltekit-vite-plugin)
 *There is a strange bug just in StackBlitz whereby styles for the Logo and Prose components are not being applied, but it's still a useful way to quickly try things out.*
@@ -28,6 +30,7 @@ Read more about [Why?](./Why.md)
 ### Basic example
 
 Before:
+
 ```html
 <div class="w-full mb-1" />
 ``` 
@@ -39,7 +42,7 @@ After:
 <style>
   :global(.uno-3hashz) {
     width: full;
-    right: .25rem;
+    margin-right: .25rem;
   }
 </style>
 ```
@@ -146,7 +149,7 @@ The class directive shorthand usage of `class:text-sm` where `text-sm` is both a
 
 ```html
 <span class:logo />
-<!-- This would work if logo is set as a shortcut in the plugin settings and it is a variable in this component. Note that it's class name will not be changed -->
+<!-- This would work if logo is set as a shortcut in the plugin settings and it is a variable in this component -->
 
 <div class="bg-red-100 text-lg">Hello</div>
 
@@ -171,7 +174,7 @@ The class directive shorthand usage of `class:text-sm` where `text-sm` is both a
 will be transformed into this:
 
 ```html
-<span class:logo />
+<span class:uno-0hashz={logo} />
 
 <div class="uno-1hashz">Hello</div>
 
@@ -219,7 +222,7 @@ will be transformed into this:
     padding-bottom:0.25rem;
   }
 
-  :global(.logo) {
+  :global(.uno-0hashz) {
     /* logo styles will be put here... */
   }
   
@@ -239,14 +242,14 @@ When this reaches the Svelte compiler, it will remove the :global() wrappers, an
 
 ## Resets
 
-By default UnoCSS leaves style resetting up to each user but they do provide some convenient [reset options](https://github.com/unocss/unocss#style-resetting). Since that SvelteKit provides no convenient `main.ts` sort of location where styles can be guaranteed to come first you either must manually place these into the head of `app.html` as seen in [`sveltekit-preprocess's app.html`](./examples/sveltekit-preprocess/src/app.html) file or you easily add them at the beginning of svelte-scoped-uno's global styles using the `addReset` option.
+By default UnoCSS leaves style resetting up to each user but they do provide some convenient [reset options](https://github.com/unocss/unocss#style-resetting). Since that SvelteKit provides no convenient `main.ts` sort of location where styles can be guaranteed to come first you either must manually place these into the head of `app.html` as seen in [`sveltekit-preprocess's app.html`](./examples/sveltekit-preprocess/src/app.html) file or you easily add them at the beginning of svelte-scoped-uno's global styles using the `injectReset` option.
 
 ```diff
 // vite.config.ts
 // ...
   plugins: [
     SvelteScopedUno({
-+     addReset: 'tailwind',
++     injectReset: "@unocss/reset/tailwind.css"
     }),
     sveltekit(),
   ],
@@ -278,7 +281,6 @@ Do to the unique nature of having a few necessary styles in a global stylesheet 
 
 - It should ignore `class="mr-1"` type of strings defined inside comments but it doesn't
 - Classes referenced in explanatory markdown documentation that is parsed by MDSvex will be transformed contrary to expectation (and styles will be needlessly added). This package should ignore code blocks (whether inline surrounded by single backticks and multiple lines surrounded by three backticks)
-- Placing `dark:` prefixed styles in a component with `<style global></style>` will not work. Not sure if this is relevant anymore with the move away from using `<style global>` in that `vite-preprocess` doesn't support this feature.
 
 ## Credit
 

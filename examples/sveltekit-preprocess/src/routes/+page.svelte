@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Button from "$lib/Button.svelte";
 </script>
 
@@ -12,7 +12,9 @@
     Visit <a class="underline" href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
   </p>
 
-  <Button onclick={() => alert("hello!")}>Hello</Button>
-</div>
+  <div>
+    <Button class="mb-2" onclick={() => alert("hello!")}>Hello</Button>
+  </div>
 
-<div class="logo bg-red" />
+  <div class="logo bg-red-100" />
+</div>
