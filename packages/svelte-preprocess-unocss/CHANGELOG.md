@@ -1,5 +1,17 @@
 # svelte-preprocess-unocss
 
+## 0.1.0
+
+### Minor Changes
+
+- 89f3a80: sync with code being merged back into UnoCSS, improve --at-apply to handle all use cases
+- use `injectReset` instead of `addReset` which is now deprecated
+
+### Patch Changes
+
+- Updated dependencies [89f3a80]
+  - svelte-scoped-uno@0.1.0
+
 ## 0.0.3
 
 ### Patch Changes
