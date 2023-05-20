@@ -4,6 +4,7 @@
   import Logos from "./Logos.svelte";
   import Prose from "./Prose.svelte";
   import RightToLeftDependent from "./RightToLeftDependent.svelte";
+  import Forms from "$lib/Forms.svelte";
 
   let red = false;
   let rtl = true;
@@ -18,7 +19,9 @@
 
   <Logos />
 
-  <p class="mt-10 font-mono">.font-mono is set to Fira Code => with nice ligatures (preset-web-fonts)</p>
+  <p class="mt-10 font-mono">
+    .font-mono is set to Fira Code => with nice ligatures (preset-web-fonts)
+  </p>
 
   <Prose />
 
@@ -48,6 +51,10 @@
   </div>
 
   <Counter />
+
+  <div class="my-5 border" />
+
+  <Forms />
 
   <div class="corner">Fixed</div>
 </div>
