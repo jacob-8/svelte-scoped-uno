@@ -1,5 +1,11 @@
 # svelte-scoped-uno
 
+## 0.1.4
+
+### Patch Changes
+
+- better module resolution
+
 ## 0.1.3
 
 ### Patch Changes
